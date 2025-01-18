@@ -1,0 +1,81 @@
+.report-page {
+    display: flex;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .report-container {
+    display: flex;
+    width: 100%;
+  }
+  
+  .sidebar {
+    width: 20%;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1rem;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .report-content {
+    width: 80%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  
+  .report-content h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .answer-review {
+    margin-bottom: 30px;
+  }
+  
+  .answer-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .answer-card p {
+    margin: 5px 0;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .actions {
+    margin-top: 20px;
+  }
+  

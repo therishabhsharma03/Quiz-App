@@ -1,25 +1,32 @@
-// components/Timer.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Timer = () => {
-  const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes in seconds
+const Timer = ({ onTimeUp }) => {
+  const [timeLeft, setTimeLeft] = useState(1800); // 30 minutes in seconds
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft((prevTime) => prevTime - 1);
+      setTimeLeft((prevTime) => {
+        if (prevTime === 0) {
+          clearInterval(interval);
+          onTimeUp(); // Notify parent when time is up
+          return prevTime;
+        }
+        return prevTime - 1;
+      });
     }, 1000);
 
-    if (timeLeft === 0) {
-      clearInterval(interval);
-      // Auto-submit quiz (add functionality for auto-submit)
-    }
+    return () => clearInterval(interval); // Clear interval when component unmounts
+  }, [onTimeUp]);
 
-    return () => clearInterval(interval);
-  }, [timeLeft]);
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
 
   return (
     <div className="timer">
-      <p>Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60}</p>
+      <p>Time Left: {formatTime(timeLeft)}</p>
     </div>
   );
 };

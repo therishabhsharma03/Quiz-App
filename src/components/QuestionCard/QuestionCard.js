@@ -1,26 +1,21 @@
 import React from 'react';
-import './QuestionCard.css'; // Make sure to import the CSS for styling
+import './QuestionCard.css';
 
 const QuestionCard = ({ question, choices, onAnswer, userAnswer }) => {
   return (
     <div className="question-card">
-      <h2 className="question-text">{question}</h2>
+      <div className="question-text">
+        <p>{question}</p>
+      </div>
       <div className="choices">
         {choices.map((choice, index) => (
-          <div key={index} className="choice">
-            <input
-              type="radio"
-              id={`choice${index}`}
-              name="answer"
-              value={choice}
-              checked={userAnswer === choice}
-              onChange={() => onAnswer(choice)}
-              className="choice-input"
-            />
-            <label htmlFor={`choice${index}`} className={`choice-label ${userAnswer === choice ? 'selected' : ''}`}>
-              {choice}
-            </label>
-          </div>
+          <button
+            key={index}
+            onClick={() => onAnswer(choice)}
+            className={`choice-button ${userAnswer === choice ? 'selected' : ''}`}
+          >
+            {choice}
+          </button>
         ))}
       </div>
     </div>

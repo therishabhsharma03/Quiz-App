@@ -1,66 +1,113 @@
-.question-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.8s ease-in-out;
-    margin-bottom: 20px;
+/* Color Variables */
+:root {
+    --primary-color: #f06595; /* Main color for buttons and selected states */
+    --background-color: #ffffff; /* Background color for the card */
+    --hover-background-color: #f06595; /* Hover effect color */
+    --text-color: #444; /* Text color for the question */
+    --button-bg-color: #f0f0f0; /* Default background for choice buttons */
+    --button-border-color: #ddd; /* Border color for choice buttons */
+    --button-hover-shadow: rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    --shadow-box: 0 4px 10px rgba(0, 0, 0, 0.2); /* Box shadow for buttons */
+    --choice-text-color: #888; /* Grey color for choice text */
   }
   
-  .question-text {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .choices {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .choice {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .choice-input {
-    display: none;
-  }
-  
-  .choice-label {
-    padding: 12px 20px;
-    font-size: 1.2rem;
-    background-color: #f0f0f0;
-    border-radius: 25px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-    width: 100%;
+  /* Resetting default margin, padding, and box-sizing */
+  * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
   }
   
-  .choice-label:hover {
-    background-color: #ff6b6b;
-    color: white;
+  /* Question Card Styling */
+  .question-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Question Text Styling */
+  .question-text p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Choices Container Styling: Changed to Grid */
+  .choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 15px;
+  }
+  
+  /* Individual Choice Button Styling */
+  .choice-button {
+    padding: 12px 20px;
+    background-color: var(--button-bg-color);
+    border: 1px solid var(--button-border-color);
+    border-radius: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--choice-text-color); /* Grey color for choice text */
+  }
+  
+  /* Hover Effect for Choices */
+  .choice-button:hover {
     transform: translateY(-3px);
-  }
-  
-  .choice-label.selected {
-    background-color: #f06595;
+    background-color: var(--hover-background-color);
     color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--button-hover-shadow);
   }
   
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
+  /* Selected Choice Button Styling */
+  .choice-button.selected {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-box);
+  }
+  
+  /* Responsive Design for smaller screens */
+  @media (max-width: 768px) {
+    .question-card {
+      padding: 15px;
     }
-    100% {
-      opacity: 1;
+  
+    .question-text p {
+      font-size: 1.3rem;
+    }
+  
+    .choice-button {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .question-card {
+      padding: 10px;
+    }
+  
+    .question-text p {
+      font-size: 1.1rem;
+    }
+  
+    .choice-button {
+      font-size: 1rem;
     }
   }
   
