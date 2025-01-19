@@ -2,14 +2,14 @@
 :root {
   --background-gradient-start: rgb(246, 245, 242);
   --background-gradient-end: rgb(240, 235, 227);
-  --container-bg: rgba(243, 208, 215, 0.5);
+  --container-bg: rgba(208, 224, 243, 0.5);
   --container-shadow: rgba(0, 0, 0, 0.3);
-  --title-color: #bd9393;
+  --title-color: #282828;
   --input-border-color: rgb(255, 239, 239);
   --input-focus-border: rgb(240, 235, 227);
   --input-focus-shadow: rgba(240, 235, 227, 0.6);
-  --button-bg: rgb(243, 208, 215);
-  --button-hover-bg: rgb(255, 239, 239);
+  --button-bg: rgb(176, 188, 239);
+  --button-hover-bg: rgb(57, 66, 131);
   --button-text-color: white;
   --button-shadow-hover: rgba(243, 208, 215, 0.5);
 }
