@@ -274,33 +274,34 @@ margin-top: 30%;
 }
 @media screen and (max-width: 768px) {
     .actions {
-        flex-direction: column;
-        align-items: center; /* Center the buttons */
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center buttons horizontally */
+        gap: 12px; /* Add even spacing between buttons */
+        padding: 0 10px; /* Add some padding on the sides */
     }
 
     .action-buttons button {
-        margin: 10px; /* Add some space around the buttons */
-        width: auto; /* Let buttons take up only the necessary space */
-        padding: 12px 24px; /* Make buttons more touch-friendly */
-        font-size: 1rem; /* Adjust font size for better readability */
-        background: linear-gradient(45deg, #4caf50, #81c784); /* Add a gradient */
-        color: #fff;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-        border: none;
-        border-radius: 20px; /* Rounded corners */
-        transition: transform 0.2s ease, background-color 0.3s ease;
+        width: 90%; /* Buttons take up 90% of the container's width */
+        max-width: 400px; /* Limit the maximum width for larger devices */
+        padding: 12px 0; /* Adjust padding for better touch targets */
+        font-size: 1rem; /* Consistent, readable font size */
+        color: #ffffff; /* White text for contrast */
+        background-color: #4caf50; /* Primary button color */
+        border: none; /* Remove default borders */
+        border-radius: 8px; /* Rounded corners for a modern look */
+        text-align: center; /* Center the text */
+        transition: background-color 0.3s ease; /* Smooth hover effect */
     }
 
     .action-buttons button:hover {
-        background: linear-gradient(45deg, #388e3c, #66bb6a); /* Darker gradient on hover */
-        transform: scale(1.05); /* Slight zoom effect */
+        background-color: #388e3c; /* Slightly darker green on hover */
     }
 }
 
 @media screen and (max-width: 480px) {
     .action-buttons button {
-        margin: 8px; /* Reduce margin for smaller screens */
-        font-size: 0.9rem; /* Slightly smaller font size */
-        padding: 10px 20px; /* Adjust padding */
+        font-size: 0.95rem; /* Slightly smaller font for very small screens */
+        padding: 10px 0; /* Adjust padding for compact design */
     }
 }
