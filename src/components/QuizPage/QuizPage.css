@@ -1,167 +1,256 @@
-/* Define the color variables */
-:root {
-    --primary-color: #007bff;
-    --secondary-color: #28a745;
-    --warning-color: #ffc107;
-    --neutral-color: #ccc;
-    --light-bg-color: #f5f5f5;
-    --dark-bg-color: #333;
-    --popup-bg-color: #fff;
-    --hover-color: #0056b3;
-    --highlight-color: #f6ff00;
-  }
-  
-  /* Main quiz page styling */
-  .quiz-page {
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, #f6f9fc, #e9eff5);
+    min-height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .quiz-container {
-    display: flex;
+}
+
+/* Quiz Page Container */
+.quiz-page {
     width: 100%;
-    height: 100vh;
-    transition: filter 0.3s ease; /* Smooth blur effect */
-  }
-  
-  /* Blur the background content */
-  .quiz-container.blur-background {
-    filter: blur(5px); /* Apply blur effect */
-    pointer-events: none; /* Disable interaction with blurred content */
-  }
-  
-  /* Sidebar styles */
-  .sidebar {
-    width: 20%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in;
+}
+
+.quiz-container.blur-background {
+    filter: blur(5px);
+}
+
+.sidebar {
+    width: 250px;
+    background: #c9e3ff;
     padding: 20px;
-    background-color: var(--light-bg-color);
-    border-radius: 8px;
-    margin-right: 20px;
-  }
-  
-  .sidebar h2 {
-    font-size: 1.2rem;
-    color: var(--dark-bg-color);
-    margin-bottom: 15px;
-  }
-  
-  .question-list {
+    color: #fff;
+    border-radius: 15px 0 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.question-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-  }
-  
-  .question-box {
+    height: auto; /* Dynamic height based on content */
+}
+
+.question-box {
     width: 40px;
     height: 40px;
+    background: #ddd;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    font-size: 1rem;
     font-weight: bold;
-    color: #fff;
-  }
-  
-  /* Question box statuses */
-  .unvisited {
-    background-color: var(--neutral-color);
-  }
-  
-  .visited {
-    background-color: var(--primary-color);
-  }
-  
-  .answered {
-    background-color: var(--secondary-color);
-  }
-  
-  .marked-for-review {
-    background-color: var(--warning-color);
-  }
-  
-  .current {
-    border: 3px solid var(--highlight-color);
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
-  }
-  
-  /* Question content styles */
-  .question-content {
-    width: 80%;
-    padding: 20px;
-    background-color: var(--popup-bg-color);
-    border-radius: 8px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  button:hover {
-    background-color: var(--hover-color);
-  }
-  
-  .actions {
+    transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.2s;
+}
+
+/* Highlight logic */
+.question-box:hover {
+    background: #ff6f61;
+    transform: scale(1.1);
+}
+
+.question-box.current {
+    background: #4caf50; /* Green for current question */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.question-box.unvisited {
+    background: #ddd; /* Default for unvisited */
+}
+
+.question-box.visited {
+    background: #ff3b3b; /* Yellow for visited questions */
+}
+
+.question-box.answered {
+    background: #48b43c; /* Blue for answered questions */
+}
+
+.question-box.marked-for-review {
+    background: #fff200; /* Orange for marked-for-review questions */
+}
+
+.question-box.unattempted {
+    background: #dbf436; /* Red for unattempted questions */
+}
+
+/* Action Buttons */
+.action-buttons button {
+    background: #4caf50;
+    margin: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.action-buttons button:hover {
+    background: #2b6539;
+}
+
+.mark-review-button {
+    background: #ff9800;
     margin-top: 20px;
-  }
-  
-  /* Popup overlay styles */
-  .popup-overlay {
+}
+
+/* Question Content */
+.question-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.question-content h2 {
+    font-size: 1.75rem;
+    color: #333;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Popup styles */
+.popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999; /* Overlay above content but below popup */
-  }
-  
-  .popup {
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    animation: fadeInOverlay 0.3s ease-in;
+}
+
+.popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--popup-bg-color);
+    background: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Popup above overlay */
-    width: 400px; /* Adjust width as needed */
-  }
-  
-  .popup-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    width: 400px;
     text-align: center;
-  }
-  
-  .popup-content h2 {
+    animation: fadeInPopup 0.3s ease-in;
+}
+
+.popup-content h2 {
+    font-size: 1.5rem;
     margin-bottom: 10px;
-  }
-  
-  .popup-content ul {
-    text-align: left;
+}
+
+.popup-content ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
-  }
-  
-  .popup-content button {
-    margin: 10px 5px;
+}
+
+.popup-content li {
+    margin: 5px 0;
+}
+
+.actions button {
     padding: 10px 20px;
+    margin-top: 10px;
     border: none;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-  }
-  
-  .popup-content button:hover {
-    background: var(--hover-color);
-  }
-  
+    transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+    background: #45a049;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInOverlay {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInPopup {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .quiz-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .question-content {
+        padding: 10px;
+    }
+
+    .question-box {
+        width: 35px;
+        height: 35px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,88 +1,118 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .start-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0; /* Light background for body */
+}
+
+.start-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(45deg, #ff6b6b, #f06595);
+  animation: gradientShift 6s infinite alternate;
+}
+
+.container {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%; /* Ensure it is responsive */
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.email-input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.email-input:focus {
+  border-color: #f06595;
+  box-shadow: 0 0 5px rgba(240, 101, 149, 0.6); /* Adding focus effect */
+}
+
+.start-button {
+  padding: 12px 24px;
+  background-color: #f06595;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-button:hover {
+  transform: translateY(-3px);
+  background-color: #ff6b6b;
+  box-shadow: 0 4px 8px rgba(240, 101, 149, 0.5); /* Hover shadow */
+}
+
+.start-button:active {
+  transform: translateY(1px);
+  background-color: #f06595; /* Active state color */
+}
+
+@keyframes gradientShift {
+  0% {
     background: linear-gradient(45deg, #ff6b6b, #f06595);
-    animation: gradientShift 6s infinite alternate;
   }
-  
-  .container {
-    text-align: center;
-    color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    background: rgba(0, 0, 0, 0.5);
+  100% {
+    background: linear-gradient(45deg, #f06595, #ff6b6b);
   }
-  
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
   .title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    animation: fadeIn 1.5s ease-in-out;
+    font-size: 2.5rem; /* Reduce title size on smaller screens */
   }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+
+  .container {
+    padding: 1rem; /* Reduce padding for small screens */
+    width: 90%; /* Make the container more fluid on smaller screens */
   }
-  
+
   .email-input {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    transition: all 0.3s ease;
+    font-size: 0.9rem; /* Reduce font size on smaller screens */
   }
-  
-  .email-input:focus {
-    border: 2px solid #f06595;
-  }
-  
+
   .start-button {
     padding: 10px 20px;
-    background-color: #f06595;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    font-size: 1rem; /* Adjust button size */
   }
-  
-  .start-button:hover {
-    transform: translateY(-3px);
-    background-color: #ff6b6b;
-  }
-  
-  @keyframes gradientShift {
-    0% {
-      background: linear-gradient(45deg, #ff6b6b, #f06595);
-    }
-    100% {
-      background: linear-gradient(45deg, #f06595, #ff6b6b);
-    }
-  }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
+}

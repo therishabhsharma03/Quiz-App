@@ -1,0 +1,53 @@
+/* Timer Component Styling */
+.timer {
+    position: fixed;
+    top: 20px; /* 20px from the top of the screen */
+    left: 20px; /* 20px from the left side of the screen */
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem; /* Larger font size for better readability */
+    font-weight: bold;
+    color: #333; /* Dark color for the text */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Styling for the timer when time is almost up */
+.timer.time-warning {
+    color: #e74c3c; /* Red color for the text when time is running out */
+    text-transform: uppercase;
+    font-size: 1.6rem;
+}
+
+/* Add animation for time running out */
+.timer.warning {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .timer {
+        top: 10px; /* Adjust position for smaller screens */
+        left: 10px;
+    }
+    .timer p {
+        font-size: 1.2rem; /* Smaller text size for mobile devices */
+    }
+}

@@ -32,9 +32,22 @@
     width: 100%;
     margin: 0 auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: auto; /* Allow height to adjust based on content */
+    min-height: 250px; /* Minimum height to keep space consistent */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Keeps buttons at the bottom */
   }
   
   /* Question Text Styling */
+  .question-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Takes up remaining space */
+    min-height: 80px; /* Minimum height for the question */
+  }
+  
   .question-text p {
     font-size: 1.5rem;
     font-weight: bold;
@@ -94,6 +107,11 @@
   
     .choice-button {
       font-size: 1.1rem;
+    }
+  
+    /* Adjust grid layout for smaller screens */
+    .choices {
+      grid-template-columns: 1fr; /* Single column on smaller screens */
     }
   }
   

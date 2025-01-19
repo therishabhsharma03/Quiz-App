@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
-const Timer = ({ onTimeUp }) => {
+import './Timer.css'
+const Timer = ({ onTimeUp,setRemainingTime }) => {
   const [timeLeft, setTimeLeft] = useState(1800); // 30 minutes in seconds
 
   useEffect(() => {
@@ -11,12 +11,14 @@ const Timer = ({ onTimeUp }) => {
           onTimeUp(); // Notify parent when time is up
           return prevTime;
         }
+        
+        setRemainingTime(formatTime(prevTime)); 
         return prevTime - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval); // Clear interval when component unmounts
-  }, [onTimeUp]);
+  }, [onTimeUp,setRemainingTime]);
 
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
