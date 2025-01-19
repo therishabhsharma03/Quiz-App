@@ -4,27 +4,27 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f0f0f0; /* Light background for body */
-}
+  background-color: #000000; 
+} */
 
 .start-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(45deg, #ff6b6b, #f06595);
+  background: linear-gradient(45deg, rgb(246, 245, 242), rgb(240, 235, 227));
   animation: gradientShift 6s infinite alternate;
 }
 
 .container {
   text-align: center;
-  color: white;
+  color: #bd8282;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(243, 208, 215, 0.5);
   max-width: 400px;
   width: 100%; /* Ensure it is responsive */
 }
@@ -46,19 +46,19 @@ body {
   padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
-  border: 2px solid #ddd;
+  border: 2px solid rgb(255, 239, 239);
   outline: none;
   transition: all 0.3s ease;
 }
 
 .email-input:focus {
-  border-color: #f06595;
-  box-shadow: 0 0 5px rgba(240, 101, 149, 0.6); /* Adding focus effect */
+  border-color: rgb(240, 235, 227);
+  box-shadow: 0 0 5px rgba(240, 235, 227, 0.6); /* Adding focus effect */
 }
 
 .start-button {
   padding: 12px 24px;
-  background-color: #f06595;
+  background-color: rgb(243, 208, 215);
   border: none;
   color: white;
   font-size: 1.2rem;
@@ -69,21 +69,21 @@ body {
 
 .start-button:hover {
   transform: translateY(-3px);
-  background-color: #ff6b6b;
-  box-shadow: 0 4px 8px rgba(240, 101, 149, 0.5); /* Hover shadow */
+  background-color: rgb(255, 239, 239);
+  box-shadow: 0 4px 8px rgba(243, 208, 215, 0.5); /* Hover shadow */
 }
 
 .start-button:active {
   transform: translateY(1px);
-  background-color: #f06595; /* Active state color */
+  background-color: rgb(243, 208, 215); /* Active state color */
 }
 
 @keyframes gradientShift {
   0% {
-    background: linear-gradient(45deg, #ff6b6b, #f06595);
+    background: linear-gradient(45deg, rgb(246, 245, 242), rgb(240, 235, 227));
   }
   100% {
-    background: linear-gradient(45deg, #f06595, #ff6b6b);
+    background: linear-gradient(45deg, rgb(240, 235, 227), rgb(246, 245, 242));
   }
 }
 

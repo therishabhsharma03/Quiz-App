@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './ReportPage.css';
 
-const ReportPage = () => {
+const CustomReportPage = () => {
   const { state } = useLocation();
   const { answers, questions } = state || { answers: [], questions: [] };
   const navigate = useNavigate();
@@ -25,9 +25,9 @@ const ReportPage = () => {
   const totalQuestions = questions.length;
 
   return (
-    <div className="report-page">
-      <div className="report-container">
-        <div className="sidebar">
+    <div className="custom-report-page">
+      <div className="custom-report-container">
+        <div className="custom-sidebar">
           <h2>Quiz Summary</h2>
           <ul>
             <li>Total Questions: {totalQuestions}</li>
@@ -35,18 +35,18 @@ const ReportPage = () => {
             <li>Score: {score}/{totalQuestions}</li>
           </ul>
         </div>
-        <div className="report-content">
+        <div className="custom-report-content">
           <h2>Review Your Answers</h2>
-          <div className="answer-review">
+          <div className="custom-answer-review">
             {questions.map((question, index) => (
-              <div key={index} className="answer-card">
+              <div key={index} className="custom-answer-card">
                 <p><strong>Q{index + 1}: </strong>{question.question}</p>
                 <p><strong>Your Answer: </strong>{answers[index]}</p>
                 <p><strong>Correct Answer: </strong>{question.correct_answer}</p>
               </div>
             ))}
           </div>
-          <div className="actions">
+          <div className="custom-actions">
             <button onClick={handleRetake}>Retake Quiz</button>
           </div>
         </div>
@@ -55,4 +55,4 @@ const ReportPage = () => {
   );
 };
 
-export default ReportPage;
+export default CustomReportPage;

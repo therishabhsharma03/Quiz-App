@@ -41,51 +41,51 @@ const QuizPage = () => {
   const nextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       const newStatus = [...questionStatus];
-      
+
       // Update current question status
       if (answers[currentQuestion]) {
         newStatus[currentQuestion] = 3; // Answered
       } else if (newStatus[currentQuestion] !== 4) {
         newStatus[currentQuestion] = 2; // Visited (if not marked for review)
       }
-  
+
       // Move to the next question
       setCurrentQuestion(currentQuestion + 1);
-      
+
       // Update the status of the next question if not already answered
       if (newStatus[currentQuestion + 1] !== 3) {
         newStatus[currentQuestion + 1] = 2; // Visited
       }
-  
+
       setQuestionStatus(newStatus);
     }
   };
-  
+
 
   const previousQuestion = () => {
     if (currentQuestion > 0) {
       const newStatus = [...questionStatus];
-  
+
       // Update current question status
       if (answers[currentQuestion]) {
         newStatus[currentQuestion] = 3; // Answered
       } else if (newStatus[currentQuestion] !== 4) {
         newStatus[currentQuestion] = 2; // Visited (if not marked for review)
       }
-  
+
       // Move to the previous question
       setCurrentQuestion(currentQuestion - 1);
-  
+
       // Update the status of the previous question if not already answered
       if (newStatus[currentQuestion - 1] !== 3) {
         newStatus[currentQuestion - 1] = 2; // Visited
       }
-  
+
       setQuestionStatus(newStatus);
     }
   };
   const jumpToQuestion = (index) => {
-    setCurrentQuestion(index);  
+    setCurrentQuestion(index);
     const newStatus = [...questionStatus];
     if (newStatus[index] !== 3) newStatus[index] = 2; // Visited if not answered
     setQuestionStatus(newStatus);
@@ -135,60 +135,63 @@ const QuizPage = () => {
       <div className={`quiz-container ${showPopup ? 'blur-background' : ''}`}>
       <Timer onTimeUp={handleTimeUp} setRemainingTime={updateTimeRemaining} />
         <div className="sidebar">
-          <h2>Questions</h2>
-          <div className="question-list">
-            {questionStatus.map((status, index) => {
-              let boxClass = '';
-              switch (status) {
-                case 1:
-                  boxClass = 'unvisited'; // Red for unvisited
-                  break;
-                case 2:
-                  boxClass = 'visited'; // Grey for visited
-                  break;
-                case 3:
-                  boxClass = 'answered'; // Green for answered
-                  break;
-                case 4:
-                  boxClass = 'marked-for-review'; // Yellow for marked for review
-                  break;
-                default:
-                  boxClass = 'unvisited';
-                  break;
-              }
-              const isCurrent = index === currentQuestion ? 'current' : '';
-              return (
-                <div
-                  key={index}
-                  className={`question-box ${boxClass} ${isCurrent}`}
-                  onClick={() => jumpToQuestion(index)}
-                >
-                  {index + 1}
-                </div>
-              );
-            })}
-          </div>
-          <button onClick={toggleMarkForReview} className="mark-review-button">
-            Mark for Review
-          </button>
-        </div>
+          <div className='sidebar-content'>
 
-        <div className='align-ops'>
-          <div className="question-content">
-            {questions.length > 0 && (
-              <QuestionCard
-                question={questions[currentQuestion].question}
-                choices={[...questions[currentQuestion].incorrect_answers, questions[currentQuestion].correct_answer]}
-                onAnswer={handleAnswer}
-                userAnswer={answers[currentQuestion]}
-              />
-            )}
+
+            <h2>Questions</h2>
+            <div className="question-list">
+              {questionStatus.map((status, index) => {
+                let boxClass = '';
+                switch (status) {
+                  case 1:
+                    boxClass = 'unvisited'; // Red for unvisited
+                    break;
+                  case 2:
+                    boxClass = 'visited'; // Grey for visited
+                    break;
+                  case 3:
+                    boxClass = 'answered'; // Green for answered
+                    break;
+                  case 4:
+                    boxClass = 'marked-for-review'; // Yellow for marked for review
+                    break;
+                  default:
+                    boxClass = 'unvisited';
+                    break;
+                }
+                const isCurrent = index === currentQuestion ? 'current' : '';
+                return (
+                  <div
+                    key={index}
+                    className={`question-box ${boxClass} ${isCurrent}`}
+                    onClick={() => jumpToQuestion(index)}
+                  >
+                    {index + 1}
+                  </div>
+                );
+              })}
+            </div>
           </div>
+          <button onClick={handleSubmit} className="submit-button">Submit Quiz</button>
+        </div>
+        <div className='major-pane'>
+            <div className="question-content">
+              {questions.length > 0 && (
+                <QuestionCard
+                  question={questions[currentQuestion].question}
+                  choices={[...questions[currentQuestion].incorrect_answers, questions[currentQuestion].correct_answer]}
+                  onAnswer={handleAnswer}
+                  userAnswer={answers[currentQuestion]}
+                />
+              )}
+            </div>
           <div className="actions">
             <div className="action-buttons">
               <button onClick={previousQuestion}>Previous Question</button>
+              <button onClick={toggleMarkForReview} className="mark-review-button"> Mark For Review</button>
               <button onClick={nextQuestion}>Next Question</button>
-              <button onClick={handleSubmit} className="submit-button">Submit Quiz</button>
+
+            
             </div>
           </div>
         </div>
