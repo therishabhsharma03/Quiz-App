@@ -1,8 +1,8 @@
 /* Color Variables */
 :root {
-  --primary-color: #f06595; /* Main color for buttons and selected states */
+  --primary-color: #56af57; /* Main color for buttons and selected states */
   --background-color: #ffffff; /* Background color for the card */
-  --hover-background-color: #f06595; /* Hover effect color */
+  --hover-background-color: #56af57; /* Hover effect color */
   --text-color: #444; /* Text color for the question */
   --button-bg-color: #f0f0f0; /* Default background for choice buttons */
   --button-border-color: #ddd; /* Border color for choice buttons */

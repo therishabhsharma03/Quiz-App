@@ -1,32 +1,44 @@
+/* Define root-level variables */
+:root {
+  --background-gradient-start: rgb(246, 245, 242);
+  --background-gradient-end: rgb(240, 235, 227);
+  --container-bg: rgba(243, 208, 215, 0.5);
+  --container-shadow: rgba(0, 0, 0, 0.3);
+  --title-color: #bd9393;
+  --input-border-color: rgb(255, 239, 239);
+  --input-focus-border: rgb(240, 235, 227);
+  --input-focus-shadow: rgba(240, 235, 227, 0.6);
+  --button-bg: rgb(243, 208, 215);
+  --button-hover-bg: rgb(255, 239, 239);
+  --button-text-color: white;
+  --button-shadow-hover: rgba(243, 208, 215, 0.5);
+}
+
+/* Universal styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #000000; 
-} */
-
 .start-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(45deg, rgb(246, 245, 242), rgb(240, 235, 227));
+  background: linear-gradient(45deg, var(--background-gradient-start), var(--background-gradient-end));
   animation: gradientShift 6s infinite alternate;
 }
 
 .container {
   text-align: center;
-  color: #bd8282;
+  color: var(--title-color);
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background: rgba(243, 208, 215, 0.5);
+  box-shadow: 0 4px 8px var(--container-shadow);
+  background: var(--container-bg);
   max-width: 400px;
-  width: 100%; /* Ensure it is responsive */
+  width: 100%;
 }
 
 .title {
@@ -46,21 +58,21 @@
   padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
-  border: 2px solid rgb(255, 239, 239);
+  border: 2px solid var(--input-border-color);
   outline: none;
   transition: all 0.3s ease;
 }
 
 .email-input:focus {
-  border-color: rgb(240, 235, 227);
-  box-shadow: 0 0 5px rgba(240, 235, 227, 0.6); /* Adding focus effect */
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 5px var(--input-focus-shadow);
 }
 
 .start-button {
   padding: 12px 24px;
-  background-color: rgb(243, 208, 215);
+  background-color: var(--button-bg);
   border: none;
-  color: white;
+  color: var(--button-text-color);
   font-size: 1.2rem;
   border-radius: 30px;
   cursor: pointer;
@@ -69,21 +81,21 @@
 
 .start-button:hover {
   transform: translateY(-3px);
-  background-color: rgb(255, 239, 239);
-  box-shadow: 0 4px 8px rgba(243, 208, 215, 0.5); /* Hover shadow */
+  background-color: var(--button-hover-bg);
+  box-shadow: 0 4px 8px var(--button-shadow-hover);
 }
 
 .start-button:active {
   transform: translateY(1px);
-  background-color: rgb(243, 208, 215); /* Active state color */
+  background-color: var(--button-bg);
 }
 
 @keyframes gradientShift {
   0% {
-    background: linear-gradient(45deg, rgb(246, 245, 242), rgb(240, 235, 227));
+    background: linear-gradient(45deg, var(--background-gradient-start), var(--background-gradient-end));
   }
   100% {
-    background: linear-gradient(45deg, rgb(240, 235, 227), rgb(246, 245, 242));
+    background: linear-gradient(45deg, var(--background-gradient-end), var(--background-gradient-start));
   }
 }
 
@@ -99,20 +111,20 @@
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .title {
-    font-size: 2.5rem; /* Reduce title size on smaller screens */
+    font-size: 2.5rem;
   }
 
   .container {
-    padding: 1rem; /* Reduce padding for small screens */
-    width: 90%; /* Make the container more fluid on smaller screens */
+    padding: 1rem;
+    width: 90%;
   }
 
   .email-input {
-    font-size: 0.9rem; /* Reduce font size on smaller screens */
+    font-size: 0.9rem;
   }
 
   .start-button {
     padding: 10px 20px;
-    font-size: 1rem; /* Adjust button size */
+    font-size: 1rem;
   }
 }
