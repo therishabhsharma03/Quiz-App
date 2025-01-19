@@ -272,84 +272,35 @@ margin-top: 30%;
         max-width: 350px;
     }
 }
-
 @media screen and (max-width: 768px) {
-    .quiz-container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        padding: 10px;
-        position: relative;
-    }
-
-    .question-box {
-        width: 30px;
-        height: 30px;
-    }
-
-    .question-content {
-        padding: 15px;
-    }
-
-    .question-list {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
     .actions {
         flex-direction: column;
+        align-items: center; /* Center the buttons */
     }
 
     .action-buttons button {
-        margin: 5px 0;
-        width: 100%;
+        margin: 10px; /* Add some space around the buttons */
+        width: auto; /* Let buttons take up only the necessary space */
+        padding: 12px 24px; /* Make buttons more touch-friendly */
+        font-size: 1rem; /* Adjust font size for better readability */
+        background: linear-gradient(45deg, #4caf50, #81c784); /* Add a gradient */
+        color: #fff;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+        border: none;
+        border-radius: 20px; /* Rounded corners */
+        transition: transform 0.2s ease, background-color 0.3s ease;
     }
 
-    .popup {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    .sidebar-content {
-        margin-top: 15%;
+    .action-buttons button:hover {
+        background: linear-gradient(45deg, #388e3c, #66bb6a); /* Darker gradient on hover */
+        transform: scale(1.05); /* Slight zoom effect */
     }
 }
 
 @media screen and (max-width: 480px) {
-    .sidebar h2 {
-        font-size: 1rem;
-    }
-
-    .question-box {
-        width: 25px;
-        height: 25px;
-    }
-
-    .question-list {
-        gap: 5px;
-    }
-
-    .question-content {
-        padding: 10px;
-    }
-
-    .actions {
-        flex-direction: column;
-    }
-
     .action-buttons button {
-        margin: 5px 0;
-        width: 100%;
-    }
-
-    .popup {
-        width: 90%;
-        max-width: 280px;
-    }
-
-    .sidebar-content {
-        margin-top: 10%;
+        margin: 8px; /* Reduce margin for smaller screens */
+        font-size: 0.9rem; /* Slightly smaller font size */
+        padding: 10px 20px; /* Adjust padding */
     }
 }
