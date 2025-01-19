@@ -85,7 +85,7 @@ margin-top: 30%;
 }
 
 .question-box.current {
-    background: #4caf50;
+    background: #b75151;
     box-shadow:    0 0 10px rgba(255, 0, 0, 0.5);
 }
 
@@ -249,8 +249,8 @@ margin-top: 30%;
     }
 
     .question-box.current {
-        background: #4caf50;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        background: #af4c4c;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     }
 
     .question-content {
