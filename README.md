@@ -14,6 +14,7 @@ This quiz application was developed as part of the CausalFunnel assignment. The 
    - Grid-based navigation system
 
 2. **Timer Component**
+   - 30-minute countdown implementation
    - Synchronized with question loading
    - Starts only after questions are successfully fetched
    - Automatic submission on timeout
@@ -22,6 +23,11 @@ This quiz application was developed as part of the CausalFunnel assignment. The 
    - Dynamic rendering of multiple-choice questions
    - Option selection handling
    - Question navigation controls
+
+4. **Report Generation**
+   - Comprehensive end-of-quiz summary
+   - Side-by-side comparison of user and correct answers
+   - Performance analytics
 
 ## 🛠️ Technical Implementation
 
@@ -41,13 +47,9 @@ This quiz application was developed as part of the CausalFunnel assignment. The 
 ## 🚧 Challenges & Solutions
 
 ### 1. HTML Entity Encoding in API Responses
-**Challenge**: The Open Trivia Database API returns quiz questions and answers with HTML entities (e.g., `&039;`, `&amp;`, `&lt;`, `&gt;`), making the text unreadable. For example, `What is Sherlock Holmes&#039;s brother?` appears instead of `What is Sherlock Holmes's brother?`.
-
-**Cause**: The API encodes special characters as HTML entities to prevent HTML injection attacks, but this encoding needs to be reversed for proper display in the frontend.
+**Challenge**: The Open Trivia Database API returns quiz questions and answers with HTML entities (e.g., `&039;`, `&amp;`, `&lt;`, `&gt;`), making the text unreadable.
 
 **Solution**: 
-- Implemented a `decodeHtmlEntity` function to convert HTML entities back to readable characters
-- Applied the decoding function to all question and answer text after fetching from the API
 ```javascript
 const decodeHtmlEntity = (encodedText) => {
     const element = document.createElement('div');
@@ -60,9 +62,6 @@ const decodeHtmlEntity = (encodedText) => {
 **Challenge**: Implementing complex state tracking for unvisited, visited, answered, and unanswered questions.
 
 **Solution**: 
-- Created a dedicated state management system using React useState
-- Implemented state transitions based on user interactions
-- Used a map data structure to efficiently track question states
 ```javascript
 const [questionStates, setQuestionStates] = useState({
   unvisited: new Set([...Array(15).keys()]),
@@ -73,11 +72,9 @@ const [questionStates, setQuestionStates] = useState({
 ```
 
 ### 3. Timer Synchronization
-**Challenge**: The timer logic was managed inside a separate component (Timer), but the remaining time needed to be accessed in the parent component (QuizPage) to handle the submission.
+**Challenge**: Synchronizing timer state with the main application for auto-submission.
 
 **Solution**:
-- Passed a function (setRemainingTime) from the parent component to the Timer component
-- Timer component updates parent state every second using useEffect and setInterval
 ```javascript
 const updateTimeRemaining = (time) => {
   setTimeRemaining(time);
@@ -110,15 +107,62 @@ const updateTimeRemaining = (time) => {
 
 1. Users have a stable internet connection for API calls
 2. Questions are always multiple-choice format
-3. 15 questions per quiz session
-4. Single correct answer per question
+3. Single correct answer per question
+4. Email validation only checks for basic email format
+
+
+## ✅ Requirements Checklist
+
+### Core Requirements
+- [x] Start page with email submission
+- [x] 15 questions display
+- [x] 30-minute countdown timer
+- [x] Auto-submission on timer expiry
+- [x] Question navigation system
+- [x] Question status tracking
+  - [x] Visited questions indicator
+  - [x] Attempted questions indicator
+- [x] End-of-quiz report page
+  - [x] User answers display
+  - [x] Correct answers display
+- [x] API Integration with OpenTDB
+  - [x] Proper handling of questions
+  - [x] Correct management of answer choices
+  - [x] Validation of correct answers
+
+### Technical Requirements
+- [x] Bug-free functionality
+- [x] Clean, well-organized code
+- [x] Proper commenting
+- [x] Code reusability
+- [x] Hosted application (on Vercel)
+- [x] Source code repository
+- [x] Detailed README
+
+### Bonus Requirements
+- [x] Responsive design for different device sizes
+- [x] Cross-browser compatibility
+  - [x] Chrome
+  - [x] Firefox
+  - [x] Safari
+  - [x] Edge
+- [x] Smooth transitions and animations
+- [x] Enhanced user experience features
+  - [x] Question state tracking system
+  - [x] Grid-based navigation
+  - [x] Visual status indicators
+
 
 ## 🚀 Future Improvements
 
 1. Implement user authentication
-2. Add leaderboard
+2. Add score tracking and leaderboard
 3. Enable custom quiz creation
 4. Add detailed analytics for question performance
+5. Implement progressive web app capabilities
+6. Add offline support
+7. Implement question categorization
+8. Add difficulty selection
 
 ---
 Deployed on Vercel • Built with React • Source Control on GitHub
