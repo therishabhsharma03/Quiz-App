@@ -172,7 +172,7 @@ const QuizPage = () => {
               })}
             </div>
           </div>
-          <button onClick={handleSubmit} className="submit-button">Submit Quiz</button>
+          <button onClick={handleSubmit} className="submit-button visibility-x">Submit Quiz</button>
         </div>
         <div className='major-pane'>
             <div className="question-content">
@@ -187,12 +187,13 @@ const QuizPage = () => {
             </div>
           <div className="actions">
             <div className="action-buttons">
-              <button onClick={previousQuestion}>Previous Question</button>
-              <button onClick={toggleMarkForReview} className="mark-review-button"> Mark For Review</button>
-              <button onClick={nextQuestion}>Next Question</button>
+              <button className='action-btn' onClick={previousQuestion}>Previous Question</button>
+              <button className='action-btn mark-review-button' onClick={toggleMarkForReview}> Mark For Review</button>
+              <button className='action-btn' onClick={nextQuestion}>Next Question</button>
 
             
             </div>
+            <button onClick={handleSubmit} className="submit-button">Submit Quiz</button>
           </div>
         </div>
       </div>

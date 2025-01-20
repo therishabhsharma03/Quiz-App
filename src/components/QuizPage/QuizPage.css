@@ -228,18 +228,30 @@ margin-top: 30%;
 /* Responsive design using media queries */
 
 @media screen and (max-width: 1024px) {
+    .visibility-x{
+        display: none;
+    }
+    .submit-button{
+        width: 50%;
+    }
+    .action-buttons{
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10%;
+    }
     .quiz-container {
         flex-direction: column;
     }
     .sidebar-content {
         flex: 1;
         overflow-y: auto;
-    /* margin-top: ; */
+    margin-top:15% ;
     }
     .sidebar {
         width: 100%;
         max-width: 100%;
         padding: 10px;
+        align-items: center;
     }
     
 
@@ -269,7 +281,7 @@ margin-top: 30%;
 
     .action-buttons button {
         margin: 5px 0;
-        width: 100%;
+        width: 50%;
     }
 
     .popup {
