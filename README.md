@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# CausalFunnel Quiz Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A dynamic quiz application that offers an interactive learning experience with multiple-choice questions, progress tracking, and timed assessments. Built with React, this application integrates with the Open Trivia Database to provide diverse quiz content.
 
-## Available Scripts
+## 🎯 Features
 
-In the project directory, you can run:
+- **Dynamic Quiz Content**
+  - 15 questions fetched from Open Trivia Database API
+  - Multiple choice format for varied learning experience
+  - Real-time question status updates
 
-### `npm start`
+- **Advanced Progress Tracking**
+  - Question status categories: Unvisited, Visited, Answered, Marked for Review
+  - Visual progress indicators
+  - Comprehensive quiz summary upon completion
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User-Friendly Interface**
+  - Interactive countdown timer
+  - Flexible navigation between questions
+  - Question marking system for later review
+  - Mobile-responsive design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technical Stack
 
-### `npm test`
+- **Frontend Framework**: React.js
+- **State Management**: React Hooks (useState, useEffect)
+- **Data Source**: Open Trivia Database API
+- **Navigation**: React Router DOM
+- **Styling**: CSS Modules
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 💻 Installation
 
-### `npm run build`
+### Prerequisites
+- Node.js (Latest stable version)
+- npm (Comes with Node.js)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Setup Instructions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/causalfunnel-quiz.git
+   cd causalfunnel-quiz
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. **Launch Development Server**
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Access the Application**
+   - Open your browser and navigate to `http://localhost:3000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📱 Usage Guide
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Starting the Quiz**
+   - Launch the application
+   - Quiz automatically fetches 15 multiple-choice questions
+   - Timer begins counting down
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **During the Quiz**
+   - Select answers for each question
+   - Navigate using Previous/Next buttons
+   - Mark questions for later review
+   - Monitor remaining time
+   - Jump to specific questions using number grid
+   - Unmark the Selection
 
-## Learn More
+3. **Quiz Completion**
+   - Submit manually or automatic submission when timer expires
+   - View detailed progress summary
+   - Review answered, marked, and unvisited questions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📁 Project Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+src/
+├── components/
+│   ├── QuestionCard/    # Question display component
+│   ├── Timer/           # Countdown timer component
+│   ├── QuizPage/        # Main quiz logic and layout
+│   └── QuestionBox/     # Question navigation grid
+│
+├── App.js               # Main application component
+└── index.js            # Application entry point
+```
 
-### Code Splitting
+## ⚙️ Customization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Modify the quiz configuration by adjusting the API parameters in `QuizPage.js`:
+```javascript
+axios.get('https://opentdb.com/api.php?amount=15&type=multiple')
+```
 
-### Analyzing the Bundle Size
+Refer to [Open Trivia Database API documentation](https://opentdb.com/) for additional customization options including:
+- Question categories
+- Difficulty levels
+- Question types
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 👥 Support
 
-### Making a Progressive Web App
+For support, bug reports, and feature requests:
+- Open an issue in the GitHub repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+Built with ❤️ for CausalFunnel
