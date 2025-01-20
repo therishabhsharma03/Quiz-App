@@ -15,17 +15,32 @@ const QuizPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
+
+  const decodeHtmlEntity = (str) => {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = str;
+    return textArea.value;
+  };
   useEffect(() => {
     axios
       .get('https://opentdb.com/api.php?amount=15&type=multiple')
       .then((response) => {
-        setQuestions(response.data.results);
+        // Decode questions before setting them to state
+        const decodedQuestions = response.data.results.map((question) => ({
+          ...question,
+          question: decodeHtmlEntity(question.question),
+          correct_answer: decodeHtmlEntity(question.correct_answer),
+          incorrect_answers: question.incorrect_answers.map(decodeHtmlEntity),
+        }));
+
+        setQuestions(decodedQuestions);
         setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {
         console.error('Error fetching quiz data:', error);
       });
   }, []);
+
   
   // Trigger the timer only when questions have been loaded
   useEffect(() => {

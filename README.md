@@ -38,6 +38,52 @@ This quiz application was developed as part of the CausalFunnel assignment. The 
   - Navigation logic
   - Answer tracking
 
+## 🚧 Challenges & Solutions
+
+### 1. HTML Entity Encoding in API Responses
+**Challenge**: The Open Trivia Database API returns quiz questions and answers with HTML entities (e.g., `&039;`, `&amp;`, `&lt;`, `&gt;`), making the text unreadable. For example, `What is Sherlock Holmes&#039;s brother?` appears instead of `What is Sherlock Holmes's brother?`.
+
+**Cause**: The API encodes special characters as HTML entities to prevent HTML injection attacks, but this encoding needs to be reversed for proper display in the frontend.
+
+**Solution**: 
+- Implemented a `decodeHtmlEntity` function to convert HTML entities back to readable characters
+- Applied the decoding function to all question and answer text after fetching from the API
+```javascript
+const decodeHtmlEntity = (encodedText) => {
+    const element = document.createElement('div');
+    element.innerHTML = encodedText;
+    return element.textContent;
+};
+```
+
+### 2. Question State Management
+**Challenge**: Implementing complex state tracking for unvisited, visited, answered, and unanswered questions.
+
+**Solution**: 
+- Created a dedicated state management system using React useState
+- Implemented state transitions based on user interactions
+- Used a map data structure to efficiently track question states
+```javascript
+const [questionStates, setQuestionStates] = useState({
+  unvisited: new Set([...Array(15).keys()]),
+  visited: new Set(),
+  answered: new Set(),
+  markedForReview: new Set()
+});
+```
+
+### 3. Timer Synchronization
+**Challenge**: The timer logic was managed inside a separate component (Timer), but the remaining time needed to be accessed in the parent component (QuizPage) to handle the submission.
+
+**Solution**:
+- Passed a function (setRemainingTime) from the parent component to the Timer component
+- Timer component updates parent state every second using useEffect and setInterval
+```javascript
+const updateTimeRemaining = (time) => {
+  setTimeRemaining(time);
+};
+```
+
 ## 💻 Setup Instructions
 
 1. **Clone the Repository**
@@ -67,50 +113,12 @@ This quiz application was developed as part of the CausalFunnel assignment. The 
 3. 15 questions per quiz session
 4. Single correct answer per question
 
-## 🚧 Challenges & Solutions
-
-### 1. Question State Management
-**Challenge**: Implementing complex state tracking for unvisited, visited, answered, and unanswered questions.
-
-**Solution**: 
-- Created a dedicated state management system using React useState
-- Implemented state transitions based on user interactions
-- Used a map data structure to efficiently track question states
-```javascript
-const [questionStates, setQuestionStates] = useState({
-  unvisited: new Set([...Array(15).keys()]),
-  visited: new Set(),
-  answered: new Set(),
-  markedForReview: new Set()
-});
-```
-
-### 2. Timer Synchronization
-**Challenge**: Problem: The timer logic was managed inside a separate component (Timer), but the remaining time needed to be accessed in the parent component (QuizPage) to handle the submission. This required synchronizing the state of the timer across components.
-
-**Solution**:
-- To resolve this, I passed a function (setRemainingTime) from the parent component to the Timer component. The Timer component updated the state in the parent every second, ensuring that the parent always had access to the latest remaining time. This was achieved using React's useEffect hook to handle side effects and setInterval to update the time every second.
-```javascript
-const updateTimeRemaining = (time) => {
-  setTimeRemaining(time);
-};
-```
-
-### 3. State Transitions
-Building the quiz application involved managing timer state, ensuring synchronization between components, and efficiently handling the auto-submit functionality. React's useState, useEffect, and state management patterns helped in achieving real-time updates and interactions between the timer and the submission logic. By breaking down the problems into smaller tasks and addressing them with React's built-in hooks and functions, I was able to create a smooth and responsive quiz experience.
-
-```
-
 ## 🚀 Future Improvements
 
 1. Implement user authentication
-2. Add score tracking and leaderboard
+2. Add leaderboard
 3. Enable custom quiz creation
 4. Add detailed analytics for question performance
-
-## 📝 License
-
-This project is licensed under the MIT License.
 
 ---
 Deployed on Vercel • Built with React • Source Control on GitHub
