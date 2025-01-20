@@ -1,45 +1,49 @@
-# CausalFunnel Quiz Application
+# Quiz Application
 
-A dynamic quiz application that offers an interactive learning experience with multiple-choice questions, progress tracking, and timed assessments. Built with React, this application integrates with the Open Trivia Database to provide diverse quiz content.
+A dynamic quiz application built with React that offers an interactive quiz experience with question tracking, timer functionality, and progress monitoring. Live demo: [Quiz App](https://quiz-app-jade-delta-97.vercel.app/quiz)
 
-## 🎯 Features
+## 🎯 Project Overview
 
-- **Dynamic Quiz Content**
-  - 15 questions fetched from Open Trivia Database API
-  - Multiple choice format for varied learning experience
-  - Real-time question status updates
+This quiz application was developed as part of the CausalFunnel assignment. The main focus was to create an intuitive quiz interface that effectively tracks user progress and manages question states.
 
-- **Advanced Progress Tracking**
-  - Question status categories: Unvisited, Visited, Answered, Marked for Review
-  - Visual progress indicators
-  - Comprehensive quiz summary upon completion
+### Key Components
 
-- **User-Friendly Interface**
-  - Interactive countdown timer
-  - Flexible navigation between questions
-  - Question marking system for later review
-  - Mobile-responsive design
+1. **QuestionTracker**
+   - Manages states: Unvisited, Visited, Answered, and Marked for Review
+   - Visual indicators for question status
+   - Grid-based navigation system
 
-## 🛠️ Technical Stack
+2. **Timer Component**
+   - Synchronized with question loading
+   - Starts only after questions are successfully fetched
+   - Automatic submission on timeout
 
-- **Frontend Framework**: React.js
-- **State Management**: React Hooks (useState, useEffect)
-- **Data Source**: Open Trivia Database API
-- **Navigation**: React Router DOM
-- **Styling**: CSS Modules
+3. **Question Display**
+   - Dynamic rendering of multiple-choice questions
+   - Option selection handling
+   - Question navigation controls
 
-## 💻 Installation
+## 🛠️ Technical Implementation
 
-### Prerequisites
-- Node.js (Latest stable version)
-- npm (Comes with Node.js)
+### Core Features
+- React Hooks for state management
+- API integration with Open Trivia Database
+- Responsive design for multiple devices
+- Question status tracking system
 
-### Setup Instructions
+### State Management
+- Used React's useState and useEffect for managing:
+  - Question states
+  - Timer synchronization
+  - Navigation logic
+  - Answer tracking
+
+## 💻 Setup Instructions
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/causalfunnel-quiz.git
-   cd causalfunnel-quiz
+   git clone [repository-url]
+   cd quiz-app
    ```
 
 2. **Install Dependencies**
@@ -47,64 +51,66 @@ A dynamic quiz application that offers an interactive learning experience with m
    npm install
    ```
 
-3. **Launch Development Server**
+3. **Run Development Server**
    ```bash
    npm start
    ```
 
 4. **Access the Application**
-   - Open your browser and navigate to `http://localhost:3000`
+   - Local: http://localhost:3000
+   - Live: https://quiz-app-jade-delta-97.vercel.app/quiz
 
-## 📱 Usage Guide
+## 🤔 Assumptions
 
-1. **Starting the Quiz**
-   - Launch the application
-   - Quiz automatically fetches 15 multiple-choice questions
-   - Timer begins counting down
+1. Users have a stable internet connection for API calls
+2. Questions are always multiple-choice format
+3. 15 questions per quiz session
+4. Single correct answer per question
 
-2. **During the Quiz**
-   - Select answers for each question
-   - Navigate using Previous/Next buttons
-   - Mark questions for later review
-   - Monitor remaining time
-   - Jump to specific questions using number grid
-   - Unmark the Selection
+## 🚧 Challenges & Solutions
 
-3. **Quiz Completion**
-   - Submit manually or automatic submission when timer expires
-   - View detailed progress summary
-   - Review answered, marked, and unvisited questions
+### 1. Question State Management
+**Challenge**: Implementing complex state tracking for unvisited, visited, answered, and unanswered questions.
 
-## 📁 Project Structure
-
-```bash
-src/
-├── components/
-│   ├── QuestionCard/    # Question display component
-│   ├── Timer/           # Countdown timer component
-│   ├── QuizPage/        # Main quiz logic and layout
-│   └── QuestionBox/     # Question navigation grid
-│
-├── App.js               # Main application component
-└── index.js            # Application entry point
-```
-
-## ⚙️ Customization
-
-Modify the quiz configuration by adjusting the API parameters in `QuizPage.js`:
+**Solution**: 
+- Created a dedicated state management system using React useState
+- Implemented state transitions based on user interactions
+- Used a map data structure to efficiently track question states
 ```javascript
-axios.get('https://opentdb.com/api.php?amount=15&type=multiple')
+const [questionStates, setQuestionStates] = useState({
+  unvisited: new Set([...Array(15).keys()]),
+  visited: new Set(),
+  answered: new Set(),
+  markedForReview: new Set()
+});
 ```
 
-Refer to [Open Trivia Database API documentation](https://opentdb.com/) for additional customization options including:
-- Question categories
-- Difficulty levels
-- Question types
+### 2. Timer Synchronization
+**Challenge**: Problem: The timer logic was managed inside a separate component (Timer), but the remaining time needed to be accessed in the parent component (QuizPage) to handle the submission. This required synchronizing the state of the timer across components.
 
-## 👥 Support
+**Solution**:
+- To resolve this, I passed a function (setRemainingTime) from the parent component to the Timer component. The Timer component updated the state in the parent every second, ensuring that the parent always had access to the latest remaining time. This was achieved using React's useEffect hook to handle side effects and setInterval to update the time every second.
+```javascript
+const updateTimeRemaining = (time) => {
+  setTimeRemaining(time);
+};
+```
 
-For support, bug reports, and feature requests:
-- Open an issue in the GitHub repository
+### 3. State Transitions
+Building the quiz application involved managing timer state, ensuring synchronization between components, and efficiently handling the auto-submit functionality. React's useState, useEffect, and state management patterns helped in achieving real-time updates and interactions between the timer and the submission logic. By breaking down the problems into smaller tasks and addressing them with React's built-in hooks and functions, I was able to create a smooth and responsive quiz experience.
+
+```
+
+## 🚀 Future Improvements
+
+1. Implement user authentication
+2. Add score tracking and leaderboard
+3. Enable custom quiz creation
+4. Add detailed analytics for question performance
+
+## 📝 License
+
+This project is licensed under the MIT License.
 
 ---
-Built with ❤️ for CausalFunnel
+Deployed on Vercel • Built with React • Source Control on GitHub
