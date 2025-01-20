@@ -11,20 +11,29 @@ const QuizPage = () => {
   const [answers, setAnswers] = useState([]);
   const [questionStatus, setQuestionStatus] = useState(Array(15).fill(1)); // 1 = Unvisited, 2 = Visited, 3 = Answered, 4 = Marked for Review
   const [showPopup, setShowPopup] = useState(false);
-  const [timeLeft, setTimeLeft] = useState('30:00');
-  const navigate = useNavigate();
   const [timeRemaining, setTimeRemaining] = useState(1800);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get('https://opentdb.com/api.php?amount=15&type=multiple')
       .then((response) => {
         setQuestions(response.data.results);
+        setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {
         console.error('Error fetching quiz data:', error);
       });
   }, []);
+  
+  // Trigger the timer only when questions have been loaded
+  useEffect(() => {
+    if (!loading) {
+      // Start the timer when questions are loaded
+      setTimeRemaining(1800); // Set the timer duration (in seconds)
+    }
+  }, [loading]);
 
   const handleAnswer = (answer) => {
     setAnswers((prevAnswers) => {
@@ -41,59 +50,46 @@ const QuizPage = () => {
   const nextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       const newStatus = [...questionStatus];
-
-      // Update current question status
-      if (answers[currentQuestion]) {
-        newStatus[currentQuestion] = 3; // Answered
-      } else if (newStatus[currentQuestion] !== 4) {
-        newStatus[currentQuestion] = 2; // Visited (if not marked for review)
+      // Only update if it's not already answered or marked for review
+      if (!answers[currentQuestion] && newStatus[currentQuestion] !== 4) {
+        newStatus[currentQuestion] = 2; // Visited
       }
-
-      // Move to the next question
       setCurrentQuestion(currentQuestion + 1);
-
-      // Update the status of the next question if not already answered
-      if (newStatus[currentQuestion + 1] !== 3) {
-        newStatus[currentQuestion + 1] = 2; // Visited
+      if (newStatus[currentQuestion + 1] === 1) {
+        newStatus[currentQuestion + 1] = 2; // Mark the next question as visited
       }
-
       setQuestionStatus(newStatus);
     }
   };
-
 
   const previousQuestion = () => {
     if (currentQuestion > 0) {
       const newStatus = [...questionStatus];
-
-      // Update current question status
-      if (answers[currentQuestion]) {
-        newStatus[currentQuestion] = 3; // Answered
-      } else if (newStatus[currentQuestion] !== 4) {
-        newStatus[currentQuestion] = 2; // Visited (if not marked for review)
+      if (!answers[currentQuestion] && newStatus[currentQuestion] !== 4) {
+        newStatus[currentQuestion] = 2; // Visited
       }
-
-      // Move to the previous question
       setCurrentQuestion(currentQuestion - 1);
-
-      // Update the status of the previous question if not already answered
-      if (newStatus[currentQuestion - 1] !== 3) {
-        newStatus[currentQuestion - 1] = 2; // Visited
-      }
-
       setQuestionStatus(newStatus);
     }
   };
+
   const jumpToQuestion = (index) => {
-    setCurrentQuestion(index);
     const newStatus = [...questionStatus];
-    if (newStatus[index] !== 3) newStatus[index] = 2; // Visited if not answered
+    if (!answers[index] && newStatus[index] !== 4) {
+      newStatus[index] = 2; // Visited
+    }
+    setCurrentQuestion(index);
     setQuestionStatus(newStatus);
   };
 
   const toggleMarkForReview = () => {
     const newStatus = [...questionStatus];
-    newStatus[currentQuestion] = newStatus[currentQuestion] === 4 ? 2 : 4; // Toggle between Marked for Review and Visited
+    if (newStatus[currentQuestion] === 4) {
+      // If currently marked for review, revert to answered or visited
+      newStatus[currentQuestion] = answers[currentQuestion] ? 3 : 2;
+    } else {
+      newStatus[currentQuestion] = 4; // Mark for review
+    }
     setQuestionStatus(newStatus);
   };
 
@@ -115,6 +111,7 @@ const QuizPage = () => {
   const handleTimeUp = () => {
     handleSubmit(); // Auto-submit when time's up
   };
+
   const updateTimeRemaining = (time) => {
     setTimeRemaining(time); // Update the time remaining state
   };
@@ -130,14 +127,23 @@ const QuizPage = () => {
 
   const { answered, reviewed, unvisited, unattempted } = getStatusCounts();
 
+  // New function to clear selection
+  const clearSelection = () => {
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion] = ''; // Clear the current answer
+    setAnswers(newAnswers);
+
+    const newStatus = [...questionStatus];
+    newStatus[currentQuestion] = 1; // Set question status to unvisited
+    setQuestionStatus(newStatus);
+  };
+
   return (
     <div className="quiz-page">
       <div className={`quiz-container ${showPopup ? 'blur-background' : ''}`}>
-      <Timer onTimeUp={handleTimeUp} setRemainingTime={updateTimeRemaining} />
+        <Timer onTimeUp={handleTimeUp} setRemainingTime={updateTimeRemaining} />
         <div className="sidebar">
-          <div className='sidebar-content'>
-
-
+          <div className="sidebar-content">
             <h2>Questions</h2>
             <div className="question-list">
               {questionStatus.map((status, index) => {
@@ -174,26 +180,38 @@ const QuizPage = () => {
           </div>
           <button onClick={handleSubmit} className="submit-button visibility-x">Submit Quiz</button>
         </div>
-        <div className='major-pane'>
-            <div className="question-content">
-              {questions.length > 0 && (
-                <QuestionCard
-                  question={questions[currentQuestion].question}
-                  choices={[...questions[currentQuestion].incorrect_answers, questions[currentQuestion].correct_answer]}
-                  onAnswer={handleAnswer}
-                  userAnswer={answers[currentQuestion]}
-                />
-              )}
-            </div>
+        <div className="major-pane">
+          <div className="question-content">
+            {questions.length > 0 && (
+              <QuestionCard
+                question={questions[currentQuestion].question}
+                choices={[...questions[currentQuestion].incorrect_answers, questions[currentQuestion].correct_answer]}
+                onAnswer={handleAnswer}
+                userAnswer={answers[currentQuestion]}
+              />
+            )}
+          </div>
           <div className="actions">
             <div className="action-buttons">
-              <button className='action-btn' onClick={previousQuestion}>Previous Question</button>
-              <button className='action-btn mark-review-button' onClick={toggleMarkForReview}> Mark For Review</button>
-              <button className='action-btn' onClick={nextQuestion}>Next Question</button>
-
-            
+              <button className='action-btn' onClick={previousQuestion} disabled={currentQuestion === 0}>
+                Previous Question
+              </button>
+              <button className='action-btn mark-review-button' onClick={toggleMarkForReview}>
+                {questionStatus[currentQuestion] === 4 ? 'Unmark' : 'Mark For Review'}
+              </button>
+              <button className='action-btn' onClick={nextQuestion} disabled={currentQuestion === questions.length - 1}>
+                Next Question
+              </button>
             </div>
-            <button onClick={handleSubmit} className="submit-button">Submit Quiz</button>
+            
+
+
+            <div className='mobile-flex'>
+            <button className="clear-selection-btn" onClick={clearSelection}>
+              Clear Selection
+            </button>
+            <button onClick={handleSubmit} className="submit-button visibility-y">Submit Quiz</button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 /* Define color variables at the root level */
 :root {
-  --primary-color: #007bff; /* Primary blue */
-  --primary-hover-color: #0056b3; /* Darker blue on hover */
+  --primary-color: rgba(136, 165, 200, 0.5); /* Primary blue */
+  --primary-hover-color: rgba(208, 224, 243, 0.5); /* Darker blue on hover */
   --sidebar-bg-color: #cbdbf7; /* Sidebar background color */
   --sidebar-text-color: rgb(33, 33, 33); /* Sidebar text color */
   --sidebar-list-item-color: #000000; /* Sidebar list item color */
@@ -138,7 +138,7 @@ button:hover {
   }
 
   button {
-    width: 100%;
+    width: 50%;
   }
 }
 
@@ -148,7 +148,7 @@ button:hover {
   }
 
   button {
-    width: 100%;
+    width: 50%;
     margin-top: 10px;
   }
 }
@@ -164,6 +164,6 @@ button:hover {
   }
 
   button {
-    width: 100%;
+    width: 50%;
   }
 }

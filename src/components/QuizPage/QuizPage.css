@@ -27,9 +27,12 @@
 }
 
 /* Sidebar */
+.visibility-y{
+    display: none;
+}
 .sidebar {
     flex: 0 0 250px; /* Fixed width of 250px */
-    background-color: #cbdbf7;
+    background-color: rgba(208, 224, 243, 0.5);
     padding: 20px;
     color: #463f3f;
     display: flex;
@@ -80,7 +83,7 @@ margin-top: 30%;
 
 /* Highlight logic */
 .question-box:hover {
-    background: #61f2ff;
+    background: rgba(208, 224, 243, 0.5);
     transform: scale(1.1);
 }
 
@@ -137,7 +140,7 @@ margin-top: 30%;
 
 .actions {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 30px;
     width: 100%;
@@ -228,8 +231,17 @@ margin-top: 30%;
 /* Responsive design using media queries */
 
 @media screen and (max-width: 1024px) {
+    .mobile-flex{
+        display: flex;
+        justify-content: space-around;
+        gap: 10%;
+        width: 100%;
+    }
     .visibility-x{
         display: none;
+    }
+    .visibility-y{
+        display: block;
     }
     .submit-button{
         width: 50%;
@@ -238,9 +250,11 @@ margin-top: 30%;
         display: flex;
         justify-content: space-evenly;
         gap: 10%;
+        width: 100%;
+
     }
     .quiz-container {
-        flex-direction: column;
+        flex-direction: column;     
     }
     .sidebar-content {
         flex: 1;
@@ -292,33 +306,34 @@ margin-top: 30%;
 @media screen and (max-width: 768px) {
     .actions {
         display: flex;
-        flex-direction: column; /* Stack buttons vertically */
-        align-items: center; /* Center buttons horizontally */
-        gap: 1  px; /* Add even spacing between buttons */
-        padding: 0 10px; /* Add some padding on the sides */
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+        padding: 0 10px;
     }
 
     .action-buttons button {
-        width: 90%; /* Buttons take up 90% of the container's width */
-        max-width: 400px; /* Limit the maximum width for larger devices */
-        padding: 12px 0; /* Adjust padding for better touch targets */
-        font-size: 1rem; /* Consistent, readable font size */
-        color: #ffffff; /* White text for contrast */
-        background-color: #4caf50; /* Primary button color */
-        border: none; /* Remove default borders */
-        border-radius: 8px; /* Rounded corners for a modern look */
-        text-align: center; /* Center the text */
-        transition: background-color 0.3s ease; /* Smooth hover effect */
+        width: 90%;
+        max-width: 400px;
+        padding: 12px 0;
+        font-size: 1rem;
+        color: #ffffff;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 8px;
+        text-align: center;
+        transition: background-color 0.3s ease;
     }
 
     .action-buttons button:hover {
-        background-color: #388e3c; /* Slightly darker green on hover */
+        background-color: #388e3c;
     }
 }
 
 @media screen and (max-width: 480px) {
     .action-buttons button {
-        font-size: 0.95rem; /* Slightly smaller font for very small screens */
-        padding: 10px 0; /* Adjust padding for compact design */
+        font-size: 0.95rem;
+        padding: 10px 0;
     }
 }
+

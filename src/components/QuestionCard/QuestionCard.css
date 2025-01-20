@@ -8,7 +8,7 @@
   --button-border-color: #ddd; /* Border color for choice buttons */
   --button-hover-shadow: rgba(0, 0, 0, 0.2); /* Shadow on hover */
   --shadow-box: 0 4px 10px rgba(0, 0, 0, 0.2); /* Box shadow for buttons */
-  --choice-text-color: #888; /* Grey color for choice text */
+  --choice-text-color: #444; /* Grey color for choice text */
 }
 
 /* Resetting default margin, padding, and box-sizing */
@@ -91,7 +91,7 @@
 /* Selected Choice Button Styling */
 .choice-button.selected {
   background-color: var(--primary-color);
-  color: white;
+  color: rgb(30, 30, 30);
   box-shadow: var(--shadow-box);
 }
 
