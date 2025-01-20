@@ -86,7 +86,7 @@ margin-top: 30%;
 
 .question-box.current {
     background: #b75151;
-    box-shadow:    0 0 10px rgba(255, 0, 0, 0.5);
+    box-shadow:    0 0 10px rgba(255, 76, 76, 0.5);
 }
 
 .question-box.unvisited {
@@ -231,12 +231,17 @@ margin-top: 30%;
     .quiz-container {
         flex-direction: column;
     }
-
+    .sidebar-content {
+        flex: 1;
+        overflow-y: auto;
+    /* margin-top: ; */
+    }
     .sidebar {
         width: 100%;
         max-width: 100%;
         padding: 10px;
     }
+    
 
     .question-list {
         justify-content: center;
@@ -249,8 +254,8 @@ margin-top: 30%;
     }
 
     .question-box.current {
-        background: #af4c4c;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        background: #ff7575;
+        box-shadow:    0 0 10px rgb(251, 102, 102);
     }
 
     .question-content {
@@ -277,7 +282,7 @@ margin-top: 30%;
         display: flex;
         flex-direction: column; /* Stack buttons vertically */
         align-items: center; /* Center buttons horizontally */
-        gap: 12px; /* Add even spacing between buttons */
+        gap: 1  px; /* Add even spacing between buttons */
         padding: 0 10px; /* Add some padding on the sides */
     }
 
